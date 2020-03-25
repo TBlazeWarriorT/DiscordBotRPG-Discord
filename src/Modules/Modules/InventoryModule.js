@@ -361,6 +361,15 @@ class InventoryModule extends GModule {
 
                 if (dataInventoryValue.error == null) {
                     if (dataInventoryValue.value > 0) {
+                        if (args[1] === "confirm") {
+                            data = await axios.post("/game/inventory/sellall", paramsSellAll);
+                            data = data.data;
+                            if (data.error == null) {
+                                msg = data.success;
+                            } else {
+                                msg = data.error;
+                            }
+                        }
                         let sellAllConfirmation = await message.channel.send(Inventory.ciValueSellAllDisplay(dataInventoryValue, paramsSellAll)).catch(e => null);
                         let checkEmoji = Emojis.getID("vmark");
                         let xmarkEmoji = Emojis.getID("xmark");
