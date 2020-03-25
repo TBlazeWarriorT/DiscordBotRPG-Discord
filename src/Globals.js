@@ -32,6 +32,9 @@ var Globals = {
             case 5:
                 rarityName = "legendary";
                 break;
+            case 6:
+                rarityName = "mythic";
+                break;
         }
         return rarityName;
     },
