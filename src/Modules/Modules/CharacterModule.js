@@ -99,18 +99,22 @@ class CharacterModule extends GModule {
 
             case "leaderboard":
                 switch (args[0]) {
+                    let offset = -1; //-1 or 0 will use player rank as offset, else offset will be 12 * args[1] (page selector)
+                    if (args[1] && args[1] >= 1) {
+                        offset = (parseInt(args[1], 10) - 1) * 12;
+                    }
                     case "level":
-                        data = await axios.get("/game/character/leaderboard/level");
+                        data = await axios.get("/game/character/leaderboard/level/:offset?");
                         break;
                     case "gold":
-                        data = await axios.get("/game/character/leaderboard/gold");
+                        data = await axios.get("/game/character/leaderboard/gold/:offset?");
                         break;
                     case "craftlevel":
-                        data = await axios.get("/game/character/leaderboard/craft/level");
+                        data = await axios.get("/game/character/leaderboard/craft/level/:offset?");
                         break;
                     default:
                     case "arena":
-                        data = await axios.get("/game/character/leaderboard/arena");
+                        data = await axios.get("/game/character/leaderboard/arena/:offset?");
                         break;
                 }
                 data = data.data;
